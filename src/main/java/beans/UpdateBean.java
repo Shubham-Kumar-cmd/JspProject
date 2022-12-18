@@ -53,4 +53,9 @@ public class UpdateBean {
 		boolean flag=edao.recordsUpdate(this);
 		return flag;
 	}
+	public boolean userDelete() {
+		EmpDao edao=new EmpDao();
+		boolean flag=edao.empDelete(this);
+		return flag;
+	}
 }

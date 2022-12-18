@@ -121,4 +121,29 @@ public class EmpDao {
 		}
 		return flag;
 	}
+	
+	//delete profile
+	public boolean empDelete(UpdateBean ub) {
+		boolean flag=false;
+		int x=0;
+		int y=0;
+		try {
+			Connection conn=DBConnection.getConnection();
+			Statement stmt=conn.createStatement();
+			x=stmt.executeUpdate("delete from register_emp where id="+ub.getId());
+			if(x==1) {
+				y=stmt.executeUpdate("delete from login_emp where id="+ub.getId());
+				if(y==1) {
+					flag=true;
+					System.out.println("deleted success "+flag);
+				}
+				else {
+					flag=false;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 }
