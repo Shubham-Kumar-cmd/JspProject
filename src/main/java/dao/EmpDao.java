@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import beans.EditBean;
 import beans.LoginBean;
 import beans.RegisterBean;
 import beans.UpdateBean;
+import beans.ViewBean;
 
 public class EmpDao {
 	//for login 
@@ -145,5 +147,29 @@ public class EmpDao {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+	
+	//view
+	public ArrayList<ViewBean> empView(){
+		ArrayList<ViewBean> al=new ArrayList<ViewBean>();
+		try {
+			Connection conn=DBConnection.getConnection();
+			Statement stmt=conn.createStatement();
+			ResultSet rs=stmt.executeQuery("select * from register_emp");
+			while(rs.next()) {
+				ViewBean vb=new ViewBean();
+				vb.setId(rs.getInt(1));
+				vb.setName(rs.getString(2));
+				vb.setEmail(rs.getString(3));
+				vb.setMobile(rs.getLong(4));
+				vb.setAddress(rs.getString(5));
+				vb.setSalary(rs.getInt(6));
+				al.add(vb);
+			}
+			System.out.println("all record found");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return al;
 	}
 }

@@ -18,7 +18,7 @@
 	} 
 	else {
 	%>
-	something went wrong, please try again...
+	something went wrong, please try again...<br>
 	<jsp:include page="delete.jsp" />
 	<%
 	}
